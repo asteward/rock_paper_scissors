@@ -4,6 +4,14 @@ class Player
     @hand = hand
   end
 
+  def hand_check
+    if (self.hand == "ROCK") || (self.hand == "PAPER") || (self.hand == "SCISSORS")
+      true
+    else
+      false
+    end
+  end
+
   def compare_hands(other_player)
     winner = "TIE"
     if self.hand == "ROCK"

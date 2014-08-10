@@ -9,6 +9,28 @@ describe 'Player' do
     end
   end
 
+  describe 'hand_check' do
+    it 'checks for a valid hand choice' do
+      new_player = Player.new("ROCK")
+      expect(new_player.hand_check).to be true
+    end
+
+    it 'checks for a valid hand choice' do
+      new_player = Player.new("PAPER")
+      expect(new_player.hand_check).to be true
+    end
+
+    it 'checks for a valid hand choice' do
+      new_player = Player.new("SCISSORS")
+      expect(new_player.hand_check).to be true
+    end
+
+    it 'checks for a valid hand choice' do
+      new_player = Player.new("LASER BEAM")
+      expect(new_player.hand_check).to be false
+    end
+  end
+
   describe 'compare_hands' do
     it 'returns the winner of rock-paper-scissors game between two players' do
       player = Player.new("ROCK")
