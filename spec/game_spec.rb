@@ -3,9 +3,19 @@ require 'game'
 
 describe 'Game' do
   describe 'initialize' do
-    it 'initializes a new game for two players' do
-      new_game = Game.new("Player1", "Player2")
+    it 'initializes a new game' do
+      new_game = Game.new()
       expect(new_game).to be_an_instance_of Game
+    end
+  end
+
+  describe 'add_winner' do
+    it 'adds the winner of the round to the list of winners' do
+      new_game = Game.new()
+      player1 = Player.new("Player One", "ROCK")
+      player2 = Player.new("Player Two", "SCISSORS")
+      winner = player1.compare_hands(player2)
+      expect(new_game.add_winner(winner)).to eq [player1]
     end
   end
 end
