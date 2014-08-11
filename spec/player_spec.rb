@@ -8,7 +8,7 @@ describe 'Player' do
       expect(new_player).to be_an_instance_of Player
     end
   end
-
+  
   describe 'compare_hands' do
     it 'returns the winner of rock-paper-scissors game between two players' do
       player = Player.new("PLAYER ONE","ROCK")
