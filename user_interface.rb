@@ -37,12 +37,13 @@ end
 
 def game_menu
   if @current_game == false
-    player1_name = player_name(1)
-    player2_name = player_name(2)
+    @game = Game.new()
+    @player1 = Player.new(player_name(1))
+    @player2 = Player.new(player_name(2))
     @current_game = true
   end
   header
-  puts "#{player1_name} vs. #{player2_name}"
+  puts "#{@player1.name} vs. #{@player2.name}"
   puts "  N > New Round"
   puts "  V > View Game Win Stats"
   puts "  R > Return to Main Menu"
@@ -74,6 +75,42 @@ def player_name(number)
     sleep 2
     player_name(number)
   end
+end
+
+def new_round
+  @player1.hand = player_choice(@player1.name)
+  @player2.hand = player_choice(@player2.name)
+  header
+  puts "And the results are..."
+  sleep 2
+  winner = @player1.compare_hands(@player2)
+  @game.winners << winner
+  puts "#{winner.name} WINS!!!"
+  sleep 3
+end
+
+def player_choice(name)
+  header
+  puts "#{name}'s turn!"
+  puts " R > ROCK!"
+  puts " P > PAPER!!"
+  puts " S > SCISSORS!!!"
+  choice = gets.chomp.upcase
+  case(choice)
+  when 'R'
+    weapon = "R"
+  when 'P'
+    weapon = "P"
+  when 'S'
+    weapon = "S"
+  else
+    puts "  \"#{choice}\" is not a valid option. Please try again."
+    sleep 2
+    player_choice(name)
+  end
+  puts "Excellent choice."
+  sleep 1
+  weapon
 end
 
 

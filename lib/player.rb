@@ -1,40 +1,32 @@
 class Player
-  attr_reader :name, :hand
-  def initialize(name, hand)
+  attr_accessor :name, :hand
+  def initialize(name)
     @name = name
-    @hand = hand
-  end
-
-  def hand_check
-    if (self.hand == "ROCK") || (self.hand == "PAPER") || (self.hand == "SCISSORS")
-      true
-    else
-      false
-    end
+    @hand = nil
   end
 
   def compare_hands(other_player)
     winner = "TIE"
-    if self.hand == "ROCK"
-      if other_player.hand == "ROCK"
+    if self.hand == "R"
+      if other_player.hand == "R"
         winner = "TIE"
-      elsif other_player.hand == "PAPER"
+      elsif other_player.hand == "P"
         winner = other_player
       else
         winner = self
       end
-    elsif self.hand == "PAPER"
-      if other_player.hand == "ROCK"
+    elsif self.hand == "P"
+      if other_player.hand == "R"
         winner = self
-      elsif other_player.hand == "PAPER"
+      elsif other_player.hand == "P"
         winner = "TIE"
       else
         winner = other_player
       end
     else
-      if other_player.hand == "ROCK"
+      if other_player.hand == "R"
         winner = other_player
-      elsif other_player.hand == "PAPER"
+      elsif other_player.hand == "P"
         winner = self
       else
         winner = "TIE"
