@@ -2,7 +2,7 @@ class Game
   attr_accessor :round, :winners
 
   def initialize()
-    @round = 0
+    @round = 1
     @winners = []
   end
 

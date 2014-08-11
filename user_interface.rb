@@ -43,7 +43,7 @@ def game_menu
     @current_game = true
   end
   header
-  puts "#{@player1.name} vs. #{@player2.name}"
+  puts "#{@player1.name} vs. #{@player2.name} -- Round #{@game.round}"
   puts "  N > New Round"
   puts "  V > View Game Win Stats"
   puts "  R > Return to Main Menu"
@@ -85,8 +85,14 @@ def new_round
   sleep 2
   winner = @player1.compare_hands(@player2)
   @game.winners << winner
-  puts "#{winner.name} WINS!!!"
-  sleep 3
+  if winner == "TIE"
+    puts "  IT'S A TIE!!!"
+  else
+    puts "  #{winner.name} WINS!!!"
+  end
+  puts "\nPress ENTER to continue..."
+  gets
+  @game.round += 1
 end
 
 def player_choice(name)
