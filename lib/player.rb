@@ -7,26 +7,26 @@ class Player
 
   def compare_hands(other_player)
     winner = "TIE"
-    if self.hand == "R"
-      if other_player.hand == "R"
+    if self.hand == "ROCK"
+      if other_player.hand == "ROCK"
         winner = "TIE"
-      elsif other_player.hand == "P"
+      elsif other_player.hand == "PAPER"
         winner = other_player
       else
         winner = self
       end
-    elsif self.hand == "P"
-      if other_player.hand == "R"
+    elsif self.hand == "PAPER"
+      if other_player.hand == "ROCK"
         winner = self
-      elsif other_player.hand == "P"
+      elsif other_player.hand == "PAPER"
         winner = "TIE"
       else
         winner = other_player
       end
     else
-      if other_player.hand == "R"
+      if other_player.hand == "ROCK"
         winner = other_player
-      elsif other_player.hand == "P"
+      elsif other_player.hand == "PAPER"
         winner = self
       else
         winner = "TIE"

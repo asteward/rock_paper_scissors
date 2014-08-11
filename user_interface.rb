@@ -33,8 +33,6 @@ def main_menu
   main_menu
 end
 
-
-
 def game_menu
   if @current_game == false
     @game = Game.new()
@@ -45,14 +43,21 @@ def game_menu
   header
   puts "#{@player1.name} vs. #{@player2.name} -- Round #{@game.round}"
   puts "  N > New Round"
-  puts "  V > View Game Win Stats"
+  if @game.round > 1
+    puts "  V > View Game History"
+  end
   puts "  R > Return to Main Menu"
   choice = gets.chomp.upcase
   case(choice)
   when 'N'
     new_round
   when 'V'
-    view_stats
+    if @game.round > 1
+      view_history
+    else
+      puts "  \"#{choice}\" is not a valid option. Please try again."
+      sleep 2
+    end
   when 'R'
     main_menu
   else
@@ -67,7 +72,7 @@ def player_name(number)
   puts "Please enter Player #{number}'s name:"
   player_name = gets.chomp.capitalize
   if player_name.length > 0
-    puts "Thank you #{player_name}!"
+    puts "Thank you, #{player_name}!"
     sleep 1.5
     player_name
   else
@@ -84,11 +89,12 @@ def new_round
   puts "And the results are..."
   sleep 2
   winner = @player1.compare_hands(@player2)
-  @game.winners << winner
   if winner == "TIE"
+    @game.tie_games += 1
     puts "  IT'S A TIE!!!"
   else
-    puts "  #{winner.name} WINS!!!"
+    @game.winners << winner
+    puts "  #{winner.name} WINS WITH #{winner.hand}!!!"
   end
   puts "\nPress ENTER to continue..."
   gets
@@ -104,11 +110,11 @@ def player_choice(name)
   choice = gets.chomp.upcase
   case(choice)
   when 'R'
-    weapon = "R"
+    weapon = "ROCK"
   when 'P'
-    weapon = "P"
+    weapon = "PAPER"
   when 'S'
-    weapon = "S"
+    weapon = "SCISSORS"
   else
     puts "  \"#{choice}\" is not a valid option. Please try again."
     sleep 2
@@ -117,6 +123,19 @@ def player_choice(name)
   puts "Excellent choice."
   sleep 1
   weapon
+end
+
+def view_history
+  count = 1
+  puts "GAME STATS:\n"
+  puts "  Number of Tie-Games: #{@game.tie_games}\n"
+  puts "  Winner's Log:"
+  @game.winners.each do |winner|
+    puts "    Round #{count.to_s}: #{winner.name} won with #{winner.hand.capitalize}"
+    count += 1
+  end
+  puts "\nPress ENTER to continue..."
+  gets
 end
 
 
