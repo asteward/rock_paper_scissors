@@ -1,8 +1,8 @@
 class Player
   attr_accessor :name, :hand
-  def initialize(name)
-    @name = name
-    @hand = nil
+  def initialize(player_info)
+    @name = player_info[:name]
+    @hand = player_info[:hand]
   end
 
   def compare_hands(other_player)

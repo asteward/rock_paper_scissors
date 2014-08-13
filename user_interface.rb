@@ -36,8 +36,8 @@ end
 def game_menu
   if @current_game == false
     @game = Game.new()
-    @player1 = Player.new(player_name(1))
-    @player2 = Player.new(player_name(2))
+    @player1 = Player.new({:name => player_name(1)})
+    @player2 = Player.new({:name => player_name(2)})
     @current_game = true
   end
   header
